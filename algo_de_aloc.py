@@ -60,12 +60,19 @@ def first_fit(memoria, processos):
 
 
 def next_fit(memoria, processos):
+    inicio = 0
+    fim = len(memoria)
     for p in processos:
-        for m in memoria:
-            if(p <= m):
-                l = memoria.index(m)
-                memoria[l] = memoria[l]-p
+        for m in range(inicio, fim):
+            if(p <= memoria[m]):
+                memoria[m] = memoria[m]-p
+                if(m == (fim-1)):
+                    inicio = 0
+                    fim = len(memoria)
+                else:
+                    inicio = m
                 break
+
     return memoria
 
 
@@ -75,3 +82,4 @@ print(memoria)
 print(best_fit(memoria.copy(), processos))
 print(wost_fit(memoria.copy(), processos))
 print(first_fit(memoria.copy(), processos))
+print(next_fit(memoria.copy(), processos))
